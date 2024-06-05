@@ -5,13 +5,21 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: ThemeData(primarySwatch: Colors.red),
     ),
   );
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var name = "Guest";
+  TextEditingController _newController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,27 +29,38 @@ class HomePage extends StatelessWidget {
         title: Text("Learning new"),
       ),
       body: Center(
-        child: Container(
-          width: 100, height: 100, //color: Colors.lightGreen,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.lightGreenAccent),
-          //child: Text("Nigga"),
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Text("Suriyaa"),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Container(
+                child: Text(name),
+              ),
             ),
-          ],
+            Container(
+              child: Text("Place holder"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextField(
+                controller: _newController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Enter your age",
+                    labelText: "Age"),
+              ),
+            )
+          ]),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.edit),
+        onPressed: () {
+          name = _newController.text;
+          setState(() {});
+        },
+        child: Icon(Icons.send),
       ),
+      drawer: Drawer(),
     );
   }
 }
