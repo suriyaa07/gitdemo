@@ -1,3 +1,4 @@
+import 'package:backendex/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,29 +18,45 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 20,
-                  width: 20,
+          child: Center(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                      width: 20,
+                    ),
+                    const Text("Welcome to login page"),
+                    TextFormField(
+                      controller: _usernameController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          hintText: "***@gmail.com", labelText: "email"),
+                    ),
+                    TextFormField(
+                      controller: _pwController,
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: "*********", labelText: "password"),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                      width: 20,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        },
+                        child: Text("Login"))
+                  ],
                 ),
-                const Text("Welcome to login page"),
-                TextFormField(
-                  controller: _usernameController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                      hintText: "***@gmail.com", labelText: "email"),
-                ),
-                TextFormField(
-                  controller: _pwController,
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      hintText: "*********", labelText: "password"),
-                ),
-              ],
+              ),
             ),
           ),
         ),
